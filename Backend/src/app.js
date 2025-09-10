@@ -10,8 +10,8 @@ app.use(cors({
 app.use(express.json({limit: '16kb'}));
 app.use(express.urlencoded({extended: true, limit: '16kb'}));
 
-app.get('/', (req,res)=>{
-    res.send('hello world!')
-})
+import transactionRouter from './routes/transaction.route.js';
+
+app.use("/api/transactions", transactionRouter);
 
 export default app;
