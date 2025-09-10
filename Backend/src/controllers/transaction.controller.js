@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 const addTransaction = async (req, res) => {
     const { title, amount, date, category } = req.body;
 
-    if(!title.trim() || !amount || !date || !category.trim()){
+    if(!title || !amount || !date || !category){
         throw new apiError(400, "title, amount, date and category is required");
     }
 
@@ -53,7 +53,7 @@ const getTransactions = async (req, res) => {
 const getTransactionsByCategory = async (req, res) => {
     const { category } = req.body;
 
-    if(!category.trim()){
+    if(!category){
         throw new apiError(400, "Transaction Category is required")
     }
 
@@ -81,7 +81,7 @@ const getTransactionsByCategory = async (req, res) => {
 const updateTransactoin = async (req, res) => {
     const { transactionId } = req.params;
     
-    if(!transactionId.trim()){
+    if(!transactionId){
         throw new apiError(400, "Transaction ID is required")
     }
 
@@ -91,7 +91,7 @@ const updateTransactoin = async (req, res) => {
 
     const { title, amount, date, category } = req.body;
 
-    if(!title.trim() || !amount || !date || !category.trim()){
+    if(!title || !amount || !date || !category){
         throw new apiError(400, "title, amount, date and category is required");
     }
 
