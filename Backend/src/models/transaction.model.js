@@ -20,7 +20,7 @@ const transactionSchema = new Schema({
     category: {
         type: String,
         required: [true, "Category is required"],
-        enum: ["Food", "Rent", "Travel", "Salary", "Shopping", "Other"]
+        enum: ["income", "expenses"]
     },
 },{ timestamps: true });
 
