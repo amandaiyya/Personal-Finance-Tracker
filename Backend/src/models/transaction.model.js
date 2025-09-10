@@ -3,23 +3,23 @@ import mongoose, { Schema } from "mongoose";
 const transactionSchema = new Schema({
     title: {
         type: String,
-        required: true,
+        required: [true, "Title is required"],
         trim: true,
     },
     
     amount: {
         type: Number,
-        required: true,
+        required: [true, "Amount is required"],
     },
 
     date: {
         type: Date,
-        required: true,
+        required: [true, "Date is required"],
     },
 
     category: {
         type: String,
-        required: true,
+        required: [true, "Category is required"],
         enum: ["Food", "Rent", "Travel", "Salary", "Shopping", "Other"]
     },
 },{ timestamps: true });

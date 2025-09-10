@@ -1,6 +1,7 @@
 import Transaction from "../models/transaction.model.js";
 import apiResponse from "../utils/apiResponse.js";
 import apiError from "../utils/apiError.js";
+import mongoose from "mongoose";
 
 const addTransaction = async (req, res) => {
     const { title, amount, date, category } = req.body;
@@ -47,7 +48,47 @@ const getTransaction = async (req, res) => {
     )
 }
 
-const updateTransactoin = async () => {}
+const updateTransactoin = async (req, res) => {
+    const { transactionId } = req.params;
+    
+    if(!transactionId.trim()){
+        throw new apiError(400, "Transaction ID is required")
+    }
+
+    if(!mongoose.Types.ObjectId.isValid(transactionId)){
+        throw new apiError(400, "Invalid Transaction ID format")
+    }
+
+    const { title, amount, date, category } = req.body;
+
+    if(!title.trim() || !amount || !date || !category.trim()){
+        throw new apiError(400, "title, amount, date and category is required");
+    }
+
+    const updatedTransaction = await Transaction.findByIdAndUpdate(
+        transactionId,
+        {
+            title,
+            amount,
+            date,
+            category,
+        },
+        {
+          new: true, 
+          runValidators: true  
+        },
+    )
+
+    if(!updatedTransaction){
+        throw new apiError(404, "Transaction Not Found")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, updatedTransaction, "Transaction updated successfully")
+    )
+}
 
 const deleteTransaction = async () => {}
 
