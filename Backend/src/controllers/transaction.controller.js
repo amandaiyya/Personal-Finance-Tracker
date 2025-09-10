@@ -30,8 +30,10 @@ const addTransaction = async (req, res) => {
     )
 }
 
-const getTransaction = async (req, res) => {
-    const transactions = await Transaction.find().sort({date: -1})
+const getTransactions = async (req, res) => {
+    const transactions = await Transaction
+    .find()
+    .sort({ date: -1 })
 
     if(!transactions || !transactions.length){
         return res
@@ -45,6 +47,34 @@ const getTransaction = async (req, res) => {
     .status(200)
     .json(
         new apiResponse(200, transactions, "Transactions fetched successfully")
+    )
+}
+
+const getTransactionsByCategory = async (req, res) => {
+    const { category } = req.body;
+
+    if(!category.trim()){
+        throw new apiError(400, "Transaction Category is required")
+    }
+
+    const transactions = await Transaction
+    .find({
+        category
+    })
+    .sort({ date: -1 })
+
+    if(!transactions || !transactions.length){
+        return res
+        .status(200)
+        .json(
+            new apiResponse(200, [], "Transactions not found by the provided category")
+        )
+    }
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, transactions, "Transaction by category fetched successfully")
     )
 }
 
@@ -116,7 +146,8 @@ const deleteTransaction = async (req, res) => {
 
 export {
     addTransaction,
-    getTransaction,
+    getTransactions,
     updateTransactoin,
     deleteTransaction,
+    getTransactionsByCategory,
 };
