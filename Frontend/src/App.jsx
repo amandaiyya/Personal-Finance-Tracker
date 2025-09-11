@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Footer, Navbar } from "./components";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
         </div>
         <Footer />
       </div>
+      
+      <Toaster position="bottom-right"/>
     </>
   )
 }

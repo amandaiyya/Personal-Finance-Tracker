@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import { TransactionList } from '../components';
 
 function TransactionListPage() {
   return (
-    <div>
-      TransactionListPage
+    <div className='w-full flex justify-center p-10'>
+      <TransactionList />
     </div>
   )
 }
