@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import apiServices from './api/api.js'
+import { Outlet } from "react-router-dom";
+import { Footer, Navbar } from "./components";
 
 function App() {
   return (
     <>
-      <div>
-        hello
+      <div className="w-screen h-screen flex flex-col">
+        <Navbar />
+        <div className="flex-1 overflow-y-auto">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
     </>
   )
