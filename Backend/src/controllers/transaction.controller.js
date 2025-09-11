@@ -78,7 +78,7 @@ const getTransactionsByCategory = async (req, res) => {
     )
 }
 
-const updateTransactoin = async (req, res) => {
+const updateTransaction = async (req, res) => {
     const { transactionId } = req.params;
     
     if(!transactionId){
@@ -147,7 +147,7 @@ const deleteTransaction = async (req, res) => {
 export {
     addTransaction,
     getTransactions,
-    updateTransactoin,
+    updateTransaction,
     deleteTransaction,
     getTransactionsByCategory,
 };

@@ -29,6 +29,48 @@ class ApiServices {
             console.log(error)
         }
     }
+
+    async getTransaction(){
+        try {
+            const {data} = await this.apiClient.get('/api/transactions/get-transactions');
+
+            return data || null;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async getTransactionByCategory({category}){
+        try {
+            const {data} = await this.apiClient.get('/api/transactions/get-transactions-by-category',{
+                category
+            })
+
+            return data || null;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async updateTransaction({transactionId}){
+        try {
+            const {data} = await this.apiClient.put(`/api/transactions/update-transaction/${transactionId}`);
+
+            return data || null;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async deleteTransaction({transactionId}){
+        try {
+            const {data} = await this.apiClient.delete(`/api/transactions/delete-transaction/${transactionId}`);
+
+            return data || null;
+        } catch (error) {
+            console.log(error)
+        }
+    }
 };
 
 const apiServices = new ApiServices();

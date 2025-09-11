@@ -4,14 +4,14 @@ import {
     deleteTransaction, 
     getTransactions, 
     getTransactionsByCategory, 
-    updateTransactoin 
+    updateTransaction 
 } from "../controllers/transaction.controller.js";
 
 const router = Router();
 
 router.route("/add-transaction").post(addTransaction);
 router.route("/get-transactions").get(getTransactions);
-router.route("/update-transaction/:transactionId").put(updateTransactoin);
+router.route("/update-transaction/:transactionId").put(updateTransaction);
 router.route("/delete-transaction/:transactionId").delete(deleteTransaction);
 router.route("/get-transactions-by-category").get(getTransactionsByCategory)
 
