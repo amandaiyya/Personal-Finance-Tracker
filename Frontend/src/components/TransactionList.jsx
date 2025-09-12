@@ -2,12 +2,13 @@ import {
     EllipsisVerticalIcon,
     XMarkIcon,
     ArrowPathIcon,
+    PlusCircleIcon,
 } from '@heroicons/react/24/solid';
 
 import {
     PlusIcon,
     MinusIcon,
-    PencilIcon
+    PencilIcon,
 } from '@heroicons/react/24/outline';
 
 import React, { useEffect, useState } from 'react'
@@ -16,21 +17,32 @@ import apiServices from '../api/api'
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
+const filter = {
+    All: "all",
+    Income: "income",
+    Expenses: "expenses"
+}
+
 function TransactionList() {
     const [openItemId, setOpenItemId] = useState(null);
     const [transactions, setTransactions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null)
+    const [sortBy, setSortBy] = useState('all');
 
     const navigate = useNavigate()
 
-    useEffect(() => {
+    const fetchAllTransactions = async () => {
         setIsLoading(true)
+        setError(null)
+        
         apiServices.getTransactions()
         .then(({data}) => {
             if(data.length > 0){
                 setTransactions(data)
                 toast.success("Transactions Listed Successfully")
+            } else {
+                setError("Transactions Not Found")
             }
         })
         .catch((error) => {
@@ -38,11 +50,88 @@ function TransactionList() {
             toast.error("Server Error")
         })
         .finally(() => setIsLoading(false))
-    },[setTransactions])
+    }
+
+    const fetchIncomeTransactions = async (category) => {
+        setIsLoading(true)
+        setError(null)
+
+        apiServices.getTransactionByCategory({category})
+        .then(({data}) => {
+            if(data.length > 0){
+                setTransactions(data)
+                toast.success("Transactions Listed Successfully")
+            } else {
+                setError("Transactions Not Found")
+            }
+        })
+        .catch((error) => {
+            setError("Transactions Not Found")
+            toast.error("Server Error")
+        })
+        .finally(() => setIsLoading(false))
+    }
+
+    const fetchExpensesTransactions = async (category) => {
+        setIsLoading(true)
+        setError(null)
+
+        apiServices.getTransactionByCategory({category})
+        .then(({data}) => {
+            if(data.length > 0){
+                setTransactions(data)
+                toast.success("Transactions Listed Successfully")
+            } else {
+                setError("Transactions Not Found")
+            }
+        })
+        .catch((error) => {
+            setError("Transactions Not Found")
+            toast.error("Server Error")
+        })
+        .finally(() => setIsLoading(false))
+    }
+
+    useEffect(() => {
+        if(sortBy === filter.All){
+            fetchAllTransactions();
+        }
+
+        if(sortBy === filter.Income){
+            fetchIncomeTransactions(filter.Income);
+        }
+
+        if(sortBy === filter.Expenses){
+            fetchExpensesTransactions(filter.Expenses);
+        }
+    },[sortBy])
 
   return (
     <div className='flex flex-col items-center gap-3'>
-        <Link to='/add' className='bg-white shadow-md p-3 w-lg text-center border border-sky-100 rounded-md hover:bg-black hover:text-white transition-colors'>Add Transaction</Link>
+        <div className='flex items-center w-lg gap-1'>
+            <Link 
+            to='/add' 
+            className='bg-white shadow-md p-3 flex-1 flex justify-center items-center gap-1 border border-sky-100 rounded-md hover:bg-black hover:text-white transition-colors'
+            >
+                <PlusCircleIcon className='w-6'/>
+                Add Transaction
+            </Link>
+            <div className='bg-white shadow-md py-3 px-2 border border-sky-100 rounded-md'>
+                <select 
+                    name='sortby' 
+                    required 
+                    defaultValue="" 
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="outline-none cursor-pointer text-black bg-white"
+                >
+                    <option value="" disabled>Sort by</option>
+                    <option value="all">All</option>
+                    <option value="income">Income</option>
+                    <option value="expenses">Expenses</option>
+                </select>
+            </div>
+        </div>
+
         {error ? (
             <div>{error}</div>
         ) : (
@@ -135,7 +224,6 @@ function TransactionList() {
                 </ul>
             </div>
         )} 
-        
     </div>
   )
 }

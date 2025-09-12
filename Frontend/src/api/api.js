@@ -52,9 +52,7 @@ class ApiServices {
 
     async getTransactionByCategory({category}){
         try {
-            const {data} = await this.apiClient.get('/api/transactions/get-transactions-by-category',{
-                category
-            })
+            const {data} = await this.apiClient.get(`/api/transactions/get-transactions-by-category?category=${category}`);
 
             return data || null;
         } catch (error) {
