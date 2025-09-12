@@ -75,7 +75,7 @@ const getTransactionById = async (req, res) => {
 }
 
 const getTransactionsByCategory = async (req, res) => {
-    const { category } = req.body;
+    const { category } = req.query;
 
     if(!category){
         throw new apiError(400, "Transaction Category is required")
