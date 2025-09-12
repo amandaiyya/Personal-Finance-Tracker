@@ -30,9 +30,19 @@ class ApiServices {
         }
     }
 
-    async getTransaction(){
+    async getTransactions(){
         try {
             const {data} = await this.apiClient.get('/api/transactions/get-transactions');
+
+            return data || null;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async getTransactionById({id}){
+        try {
+            const {data} = await this.apiClient.get(`/api/transactions/get-transaction/${id}`);
 
             return data || null;
         } catch (error) {
@@ -52,9 +62,14 @@ class ApiServices {
         }
     }
 
-    async updateTransaction({transactionId}){
+    async updateTransaction({transactionId, title, amount, category, date}){
         try {
-            const {data} = await this.apiClient.put(`/api/transactions/update-transaction/${transactionId}`);
+            const {data} = await this.apiClient.put(`/api/transactions/update-transaction/${transactionId}`,{
+                title,
+                amount,
+                category,
+                date,
+            });
 
             return data || null;
         } catch (error) {

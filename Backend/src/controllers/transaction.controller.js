@@ -50,6 +50,30 @@ const getTransactions = async (req, res) => {
     )
 }
 
+const getTransactionById = async (req, res) => {
+    const { transactionId } = req.params;
+
+    if(!transactionId){
+        throw new apiError(400, "Transaction ID is required")
+    }
+
+    if(!mongoose.Types.ObjectId.isValid(transactionId)){
+        throw new apiError(400, "Invalid Transaction ID format")
+    }
+
+    const transaction = await Transaction.findById(transactionId)
+
+    if(!transaction){
+        throw new apiError(404, "Transaction not found")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, transaction, "Transaction fetched successfully")
+    )
+}
+
 const getTransactionsByCategory = async (req, res) => {
     const { category } = req.body;
 
@@ -147,7 +171,8 @@ const deleteTransaction = async (req, res) => {
 export {
     addTransaction,
     getTransactions,
+    getTransactionById,
+    getTransactionsByCategory,
     updateTransaction,
     deleteTransaction,
-    getTransactionsByCategory,
 };
