@@ -114,7 +114,8 @@ function TransactionList() {
             className='bg-white shadow-md p-2.5 sm:p-3 text-sm sm:text-base flex-1 flex justify-center items-center gap-1 border border-sky-100 rounded-md hover:bg-black hover:text-white transition-colors'
             >
                 <PlusCircleIcon className='w-5 sm:w-6'/>
-                Add Transaction
+                <span>Add</span>
+                <span className='hidden xs:block'>Transaction</span>
             </Link>
             <div className='bg-white shadow-md p-2 sm:py-3 sm:px-2 border border-sky-100 rounded-md'>
                 <select 
@@ -143,7 +144,7 @@ function TransactionList() {
                         </div>
                     ) : (
                         transactions.map((transaction) => (
-                            <li key={transaction._id} className='w-full flex gap-3 sm:gap-4 p-2 sm:p-3 hover:bg-gray-50'>
+                            <li key={transaction._id} className='w-full flex gap-3 sm:gap-4 pl-3 p-2 sm:p-3 hover:bg-gray-50'>
                                 <div className={`w-4 border rounded-md shadow-sm ${
                                     transaction.category === "income"
                                         ? "bg-lime-200 border-lime-500"
@@ -152,7 +153,7 @@ function TransactionList() {
 
                                 <div className='flex-1 flex justify-between items-center relative'>
                                     <div>
-                                        <p className='sm:text-lg font-semibold'>{transaction.title}</p>
+                                        <p className='text-sm xs:text-base sm:text-lg font-semibold'>{transaction.title}</p>
                                         <span className='text-gray-500 text-xs sm:text-sm'>{transaction.date.split('T')[0]}</span>
                                     </div>
 

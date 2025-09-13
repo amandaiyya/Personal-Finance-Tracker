@@ -13,7 +13,7 @@ function App() {
         <Footer />
       </div>
       
-      <Toaster position="bottom-right"/>
+      <Toaster position="bottom-right" toastOptions={{className: 'text-sm sm:text-base'}}/>
     </>
   )
 }
