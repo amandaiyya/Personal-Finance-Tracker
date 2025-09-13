@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from 'react-hot-toast';
 
+// Page for Deleting Transaction
 function DeleteTransactionPage() {
   const {id} = useParams();
 
@@ -12,6 +13,7 @@ function DeleteTransactionPage() {
 
   const navigate = useNavigate();
 
+  // Handler for Deleting Transaction
   const onDelete = async () => {
     setIsLoading(true)
     apiServices.deleteTransaction({transactionId: id})
@@ -28,6 +30,7 @@ function DeleteTransactionPage() {
 
   return (
     <div className='w-full h-full flex justify-center p-10 items-center'>
+      {/* Delete Confirmation Component */}
       <DeleteConfirmation onDelete={onDelete} isLoading={isLoading}/>
     </div>
   )

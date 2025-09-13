@@ -3,6 +3,7 @@ import apiResponse from "../utils/apiResponse.js";
 import apiError from "../utils/apiError.js";
 import mongoose from "mongoose";
 
+// Route Handler to Add New Transaction
 const addTransaction = async (req, res) => {
     const { title, amount, date, category } = req.body;
 
@@ -30,6 +31,7 @@ const addTransaction = async (req, res) => {
     )
 }
 
+// Route Handler to Get All Transactions
 const getTransactions = async (req, res) => {
     const transactions = await Transaction
     .find()
@@ -50,6 +52,7 @@ const getTransactions = async (req, res) => {
     )
 }
 
+// Route Handler to Get Transaction By ID
 const getTransactionById = async (req, res) => {
     const { transactionId } = req.params;
 
@@ -74,6 +77,7 @@ const getTransactionById = async (req, res) => {
     )
 }
 
+// Route Handler to Get All Transactions By Category
 const getTransactionsByCategory = async (req, res) => {
     const { category } = req.query;
 
@@ -102,6 +106,7 @@ const getTransactionsByCategory = async (req, res) => {
     )
 }
 
+// Route Handler to Update An Existing Transaction
 const updateTransaction = async (req, res) => {
     const { transactionId } = req.params;
     
@@ -144,6 +149,7 @@ const updateTransaction = async (req, res) => {
     )
 }
 
+// Route Handler to Delete An Existing Transaction
 const deleteTransaction = async (req, res) => {
     const { transactionId } = req.params;
 

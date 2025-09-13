@@ -2,6 +2,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 
+// Component for Confirmation of Deleting Transaction
 function DeleteConfirmation({
   onDelete,
   isLoading,
@@ -16,6 +17,7 @@ function DeleteConfirmation({
           <ExclamationCircleIcon className="w-8 xs:w-10 text-red-700" />
         </div>
       </div>
+
       <div>
         <div className="text-base xs:text-lg sm:text-xl font-semibold">Delete Transaction</div>
         <div className="text-xs xs:text-sm sm:text-base mt-2 mb-3">
@@ -23,11 +25,15 @@ function DeleteConfirmation({
           <p>This action cannot be undone.</p>
         </div>
       </div>
+
       <div className="flex items-center justify-between w-full gap-3">
+        {/* Cancel Button */}
         <button 
           onClick={() => navigate('/')}
           className="w-1/2 text-sm sm:text-base border border-black rounded-md px-3 py-2 shadow-md cursor-pointer bg-black text-white"
         >Cancel</button>
+
+        {/* Delete Button */}
         <button
           onClick={() => {
             onDelete()

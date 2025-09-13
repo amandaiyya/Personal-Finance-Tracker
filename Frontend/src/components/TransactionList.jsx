@@ -23,6 +23,7 @@ const filter = {
     Expenses: "expenses"
 }
 
+// List Component For Transactions
 function TransactionList() {
     const [openItemId, setOpenItemId] = useState(null);
     const [transactions, setTransactions] = useState([]);
@@ -32,6 +33,7 @@ function TransactionList() {
 
     const navigate = useNavigate()
 
+    // Function to Fetch All Transactions
     const fetchAllTransactions = async () => {
         setIsLoading(true)
         setError(null)
@@ -52,6 +54,7 @@ function TransactionList() {
         .finally(() => setIsLoading(false))
     }
 
+    // Function to Fetch All Transactions of Income Category
     const fetchIncomeTransactions = async (category) => {
         setIsLoading(true)
         setError(null)
@@ -72,6 +75,7 @@ function TransactionList() {
         .finally(() => setIsLoading(false))
     }
 
+    // Function to Fetch All Transactions of Expenses Category
     const fetchExpensesTransactions = async (category) => {
         setIsLoading(true)
         setError(null)
@@ -109,6 +113,7 @@ function TransactionList() {
   return (
     <div className='flex w-full flex-col items-center gap-3'>
         <div className='flex items-center w-full max-w-lg gap-1 flex-wrap'>
+            {/* Add Transaction Link Button*/}
             <Link 
             to='/add' 
             className='bg-white shadow-md p-2.5 sm:p-3 text-sm sm:text-base flex-1 flex justify-center items-center gap-1 border border-sky-100 rounded-md hover:bg-black hover:text-white transition-colors'
@@ -117,6 +122,8 @@ function TransactionList() {
                 <span>Add</span>
                 <span className='hidden xs:block'>Transaction</span>
             </Link>
+
+            {/* Input for Filter */}
             <div className='bg-white shadow-md p-2 sm:py-3 sm:px-2 border border-sky-100 rounded-md'>
                 <select 
                     name='sortby' 
@@ -136,14 +143,17 @@ function TransactionList() {
         {error ? (
             <div className='text-center p-3 sm:p-4 bg-white shadow-md w-full max-w-lg border border-sky-100 rounded-md text-sm sm:text-base'>{error}</div>
         ) : (
+            // Transaction Listing
             <div className='bg-white shadow-md w-full max-w-lg h-max border border-sky-100 rounded-md'>
                 <ul className='w-full flex flex-col items-center'>
                     {isLoading ? (
+                        // Loader
                         <div className='animate-spin p-2 sm:p-3'>
                             <ArrowPathIcon className='w-5 text-gray-800'/>
                         </div>
                     ) : (
                         transactions.map((transaction) => (
+                            // Transactoin List
                             <li key={transaction._id} className='w-full flex gap-3 sm:gap-4 pl-3 p-2 sm:p-3 hover:bg-gray-50'>
                                 <div className={`w-4 border rounded-md shadow-sm ${
                                     transaction.category === "income"
@@ -177,6 +187,7 @@ function TransactionList() {
                                             )}
                                         </div>
 
+                                        {/* Button for Options */}
                                         <button 
                                             onClick={() => (
                                                 setOpenItemId(openItemId === transaction._id ? null : transaction._id)
@@ -187,8 +198,10 @@ function TransactionList() {
                                         </button>
                                     </div>
 
+                                    {/* Options Modal */}
                                     {openItemId === transaction._id && (
                                         <div className='p-2 sm:p-3 border border-sky-100 absolute top-[-1] right-0 bg-white shadow-sm rounded-md flex justify-around gap-2 text-gray-700'>
+                                            {/* Edit Button */}
                                             <button 
                                                 onClick={() => (
                                                     navigate(`/${transaction._id}/edit`)
@@ -199,6 +212,7 @@ function TransactionList() {
                                                 <PencilIcon className='w-3 sm:w-4'/>
                                             </button>
 
+                                            {/* Delete Button */}
                                             <button 
                                                 onClick={() => (
                                                     navigate(`/${transaction._id}/delete`)
@@ -208,6 +222,7 @@ function TransactionList() {
                                                 remove
                                             </button>
 
+                                            {/* Close Button */}
                                             <button 
                                                 onClick={() => (
                                                     setOpenItemId(null)

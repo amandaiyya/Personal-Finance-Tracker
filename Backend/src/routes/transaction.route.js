@@ -10,6 +10,7 @@ import {
 
 const router = Router();
 
+// All Transactions Routes
 router.route("/add-transaction").post(addTransaction);
 router.route("/get-transactions").get(getTransactions);
 router.route("/get-transaction/:transactionId").get(getTransactionById)

@@ -1,6 +1,7 @@
 import axios from "axios";
 import config from "../config/config.js";
 
+// Custom Class for Handling all the API Calls
 class ApiServices {
     apiClient;
 
@@ -15,6 +16,7 @@ class ApiServices {
         })
     }
 
+    // Method for Add Transaction
     async addTransaction({title, amount, date, category}){
         try {
             const {data} = await this.apiClient.post('/api/transactions/add-transaction',{
@@ -30,6 +32,7 @@ class ApiServices {
         }
     }
 
+    // Method for Get All Transactions
     async getTransactions(){
         try {
             const {data} = await this.apiClient.get('/api/transactions/get-transactions');
@@ -40,6 +43,7 @@ class ApiServices {
         }
     }
 
+    // Method for Get Transaction By ID
     async getTransactionById({id}){
         try {
             const {data} = await this.apiClient.get(`/api/transactions/get-transaction/${id}`);
@@ -50,6 +54,7 @@ class ApiServices {
         }
     }
 
+    // Method for Get All Transactions By Category
     async getTransactionByCategory({category}){
         try {
             const {data} = await this.apiClient.get(`/api/transactions/get-transactions-by-category?category=${category}`);
@@ -60,6 +65,7 @@ class ApiServices {
         }
     }
 
+    // Method for Update Transaction 
     async updateTransaction({transactionId, title, amount, category, date}){
         try {
             const {data} = await this.apiClient.put(`/api/transactions/update-transaction/${transactionId}`,{
@@ -75,6 +81,7 @@ class ApiServices {
         }
     }
 
+    // Method for Delete Transaction
     async deleteTransaction({transactionId}){
         try {
             const {data} = await this.apiClient.delete(`/api/transactions/delete-transaction/${transactionId}`);

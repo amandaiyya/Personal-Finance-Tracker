@@ -5,6 +5,7 @@ import { TransactionForm } from '../components';
 import { ArrowPathIcon } from '@heroicons/react/24/solid';
 import { toast } from 'react-hot-toast';
 
+// Page for Editing Transaction
 function EditTransactionPage() {
   const { id } = useParams();
   const navigate = useNavigate()
@@ -13,6 +14,7 @@ function EditTransactionPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  // Form Submit Handler for Editing Transaction
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     apiServices.updateTransaction({
@@ -66,6 +68,7 @@ function EditTransactionPage() {
 
   return (
     <div className='w-full flex justify-center p-10'>
+      {/* Transaction Form Component */}
       <TransactionForm transaction={transaction} onSubmit={onSubmit} isSubmitting={isSubmitting}/>
     </div>
   )

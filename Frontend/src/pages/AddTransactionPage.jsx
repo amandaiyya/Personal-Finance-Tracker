@@ -4,12 +4,13 @@ import apiServices from '../api/api';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-
+// Page to Add New Transaction
 function AddTransactionPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const navigate = useNavigate()
 
+  // Form Submit Handler for Adding New Transaction
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     apiServices.addTransaction(data)
@@ -26,6 +27,7 @@ function AddTransactionPage() {
 
   return (
     <div className='w-full flex justify-center p-10'>
+      {/* Transacton Form Component */}
       <TransactionForm onSubmit={onSubmit} isSubmitting={isSubmitting}/>
     </div>
   )

@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
+// Transaction DB Model Schema
 const transactionSchema = new Schema({
     title: {
         type: String,

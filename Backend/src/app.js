@@ -3,15 +3,18 @@ import cors from 'cors';
 
 const app = express();
 
+// CORS Configuration
 app.use(cors({
     origin: process.env.CORS_ORIGIN
 }));
 
+// Request Data Configuration
 app.use(express.json({limit: '16kb'}));
 app.use(express.urlencoded({extended: true, limit: '16kb'}));
 
 import transactionRouter from './routes/transaction.route.js';
 
+// Base Route
 app.use("/api/transactions", transactionRouter);
 
 export default app;

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Bars3Icon } from '@heroicons/react/24/solid';
 
+// Navbar Component
 function Navbar() {
   return (
     <div className='w-full bg-white shadow-sm px-6 py-4 flex justify-between items-center flex-wrap '>

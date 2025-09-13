@@ -4,6 +4,7 @@ import app from './app.js';
 
 const port = process.env.PORT;
 
+// Handling DB Connection
 connectDB()
 .then(()=>{
     app.on("error", (error) => {
